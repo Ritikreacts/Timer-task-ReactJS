@@ -1,25 +1,24 @@
-import React, { useRef } from 'react';
+import React, { useRef } from "react";
 
 export default function Step2() {
   const count = useRef(0);
 
-  const incrementCount = () => {
-    count.current += 1;
-  };
+  function incrementCount() {
+    return (count.current.value = Number(count.current.value) + 1);
+  }
 
   const decrementCount = () => {
-    count.current -= 1;
+    return (count.current.value = Number(count.current.value) - 1);
   };
-
-  const inputRef = useRef(0);
 
   return (
     <>
-      <h1>Counter: {count.current}</h1>
+      {console.log({ as: count.current.value })}
+      <h1>Counter: {count.current.value}</h1>
       <div className="inputs">
         <p>Counter:</p>
         <button onClick={decrementCount}>-</button>
-        <input type="text" ref={inputRef} disabled />
+        <input type="number" ref={count} value={count.current.value} disabled />
         <button onClick={incrementCount}>+</button>
       </div>
     </>

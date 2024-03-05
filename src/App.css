@@ -1,11 +1,12 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   font-family: sans-serif;
+  color: white;
 }
 
-.whole-screen{
+.whole-screen {
   width: 100vw;
   height: 100vh;
   background-color: rgb(40 40 40);
@@ -13,7 +14,7 @@
   justify-content: center;
   align-items: center;
 }
-.counter-screen{
+.counter-screen {
   width: 80%;
   height: 80%;
   border: 1px solid white;
@@ -22,16 +23,16 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap:50px;
+  gap: 50px;
 }
-.inputs{
+.inputs {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 10%;
 }
-button{
+button {
   padding: 10px 20px;
   font-size: 20px;
   color: white;
@@ -40,15 +41,22 @@ button{
   border: 0px solid transparent;
   cursor: pointer;
 }
-input[type=text]{
+input[type="number"] {
   background-color: rgb(59 59 59);
   padding: 6px;
   color: white;
   border: 1px solid white;
 }
-p,h1{
+p,
+h1 {
   font-weight: 600;
 }
-.to-left{
+.to-left {
   margin-left: -135px;
+}
+@media screen and (max-width: 768px) {
+  .counter-screen {
+    width: 90%;
+    border: none;
+  }
 }

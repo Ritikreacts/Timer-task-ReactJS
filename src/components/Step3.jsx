@@ -5,22 +5,14 @@ function Step3() {
   const [timer, setTimer] = useState(0);
 
   useEffect(() => {
-    const autoIncrement = setInterval(() => {
-      setCount(count + 1);
-    }, 1000 * timer);
-    // return () => clearInterval(autoIncrement);
-  }, [timer]);
+    if (timer > 0) {
+      const autoIncrement = setInterval(() => {
+        setCount((prev) => prev + 1);
+      }, 1000 * timer);
 
-  // if (timer === 0) {
-  //   console.log("timer is set to 0");
-  //   clearInterval();
-  // } else {
-  //   console.log(timer);
-  //   setInterval(() => {
-  //     setCount(count + 1);
-  //     console.log(count);
-  //   }, timer * 1000);
-  // }
+      return () => clearInterval(autoIncrement);
+    }
+  }, [timer]);
 
   return (
     <>
@@ -64,6 +56,7 @@ function Step3() {
             </button>
             <input
               type="number"
+              value={timer}
               onChange={(e) => {
                 setTimer((prev) => prev + e.target.value);
               }}

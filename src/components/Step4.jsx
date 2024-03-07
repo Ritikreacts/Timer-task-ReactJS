@@ -1,18 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
-function Step3() {
+function Step4() {
   const [count, setCount] = useState(0);
   const [timer, setTimer] = useState(0);
+  const incrementAmount = useRef(1);
+  const incrementAmountInput = useRef(null);
 
   useEffect(() => {
     if (timer > 0) {
       const autoIncrement = setInterval(() => {
-        setCount((prev) => prev + 1);
+        const inputNumber = incrementAmountInput.current.children[2];
+
+        console.log(inputNumber);
+        setCount((prev) => prev + incrementAmount.current);
+        console.log("test-", incrementAmount.current);
+        inputNumber.value = incrementAmount.current;
       }, 1000 * timer);
 
       return () => clearInterval(autoIncrement);
     }
-  }, [timer]);
+  });
+
+  function valueToChange() {
+    const inputNumber = incrementAmountInput.current.children[2];
+    inputNumber.value = incrementAmount.current;
+  }
 
   return (
     <>
@@ -23,7 +35,7 @@ function Step3() {
             <p>Counter:</p>
             <button
               onClick={() => {
-                setCount((pre) => pre - 1);
+                setCount((pre) => pre - incrementAmount.current.value);
               }}
             >
               -
@@ -37,7 +49,7 @@ function Step3() {
             />
             <button
               onClick={() => {
-                setCount(parseInt(count) + 1);
+                setCount(parseInt(count) + incrementAmount.current.value);
               }}
             >
               +
@@ -69,10 +81,34 @@ function Step3() {
               +
             </button>
           </div>
+          {/*increment decrement amount input:*/}
+          <div ref={incrementAmountInput} className="inputs">
+            <p className="too-left">increment decrement amount input:</p>
+            <button
+              onClick={() => {
+                incrementAmount.current = incrementAmount.current - 1;
+              }}
+            >
+              -
+            </button>
+            <input
+              type="number"
+              onChange={(e) =>
+                (incrementAmount.current = parseInt(e.target.value))
+              }
+            />
+            <button
+              onClick={() => {
+                incrementAmount.current = incrementAmount.current + 1;
+              }}
+            >
+              +
+            </button>
+          </div>
         </div>
       </div>
     </>
   );
 }
 
-export default Step3;
+export default Step4;

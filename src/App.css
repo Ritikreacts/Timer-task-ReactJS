@@ -20,7 +20,7 @@ input::-webkit-inner-spin-button {
   align-items: center;
 }
 .counter-screen {
-  width: 80%;
+  width: 90%;
   height: 80%;
   border: 1px solid white;
   color: white;
@@ -60,9 +60,17 @@ h1 {
 .to-left {
   margin-left: -135px;
 }
+.too-left {
+  margin-left: -200px;
+}
 @media screen and (max-width: 768px) {
   .counter-screen {
     width: 90%;
+    border: none;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .counter-screen {
     border: none;
   }
 }

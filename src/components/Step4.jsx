@@ -3,41 +3,32 @@ import React, { useState, useEffect, useRef } from "react";
 function Step4() {
   const [count, setCount] = useState(0);
   const [timer, setTimer] = useState(0);
-  const incrementAmount = useRef(1);
+  const incrementAmount = useRef(0);
   const incrementAmountInput = useRef(null);
-
-  // (Issue to fix____-> in the auto increment amount input field is not updating)
-  // (Issue to fix____-> in the auto increment amount input field is not updating)
-  // (Issue to fix____-> in the auto increment amount input field is not updating)
-  // (Issue to fix____-> in the auto increment amount input field is not updating)
-  // (Issue to fix____-> in the auto increment amount input field is not updating)
-  // (Issue to fix____-> in the auto increment amount input field is not updating)
-  // (Issue to fix____-> in the auto increment amount input field is not updating)
-  // (Issue to fix____-> in the auto increment amount input field is not updating)
-  // (Issue to fix____-> in the auto increment amount input field is not updating)
-  // (Issue to fix____-> in the auto increment amount input field is not updating)
-  // (Issue to fix____-> in the auto increment amount input field is not updating)
-  // (Issue to fix____-> in the auto increment amount input field is not updating)
-  // (Issue to fix____-> in the auto increment amount input field is not updating)
 
   useEffect(() => {
     if (timer > 0) {
       const autoIncrement = setInterval(() => {
-        const inputNumber = incrementAmountInput.current.children[2];
-
-        console.log(inputNumber);
+        console.log('incrementAmountInput', incrementAmountInput)
+        console.log('incrementAmount', incrementAmount)
         setCount((prev) => prev + incrementAmount.current);
-        console.log("test-", incrementAmount.current);
-        inputNumber.value = incrementAmount.current;
       }, 1000 * timer);
 
       return () => clearInterval(autoIncrement);
     }
   });
 
-  function valueToChange() {
-    const inputNumber = incrementAmountInput.current.children[2];
-    inputNumber.value = incrementAmount.current;
+  function handleIncrementAmountChange(value) {
+    incrementAmount.current = parseInt(value) || 0;
+    if (incrementAmountInput.current) {
+      incrementAmountInput.current.value = incrementAmount.current;
+    }
+  }
+
+  function decrementCount() {
+    if (count > 0) {
+      setCount((prev) => prev - incrementAmount.current);
+    }
   }
 
   return (
@@ -47,77 +38,37 @@ function Step4() {
           <h1>Counter: {count}</h1>
           <div className="inputs">
             <p>Counter:</p>
-            <button
-              onClick={() => {
-                setCount((pre) => pre - incrementAmount.current.value);
-              }}
-            >
-              -
-            </button>
+            <button onClick={decrementCount}> - </button>
             <input
               type="number"
               value={count}
-              onChange={(e) => {
-                setCount((pre) => parseInt(e.target.value));
-              }}
+              onChange={(e) => setCount(parseInt(e.target.value) || 0)}
             />
-            <button
-              onClick={() => {
-                setCount(parseInt(count) + incrementAmount.current.value);
-              }}
-            >
-              +
-            </button>
+            <button onClick={() => setCount((prev) => prev + incrementAmount.current)}> + </button>
           </div>
 
           {/* Auto increment  */}
           <div className="inputs">
             <p className="to-left">auto increment timer input:</p>
-            <button
-              onClick={() => {
-                setTimer((pre) => parseInt(pre) - 1);
-              }}
-            >
-              -
-            </button>
+            <button onClick={() => setTimer((prev) => prev - 1)}> - </button>
             <input
               type="number"
               value={timer}
-              onChange={(e) => {
-                setTimer((prev) => parseInt(e.target.value));
-              }}
+              onChange={(e) => setTimer(parseInt(e.target.value) || 0)}
             />
-            <button
-              onClick={() => {
-                setTimer((pre) => pre + 1);
-              }}
-            >
-              +
-            </button>
+            <button onClick={() => setTimer((prev) => prev + 1)}> + </button>
           </div>
-          {/*increment decrement amount input:*/}
-          <div ref={incrementAmountInput} className="inputs">
+
+          {/* increment decrement amount input: */}
+          <div className="inputs">
             <p className="too-left">increment decrement amount input:</p>
-            <button
-              onClick={() => {
-                incrementAmount.current = incrementAmount.current - 1;
-              }}
-            >
-              -
-            </button>
+            <button onClick={() => handleIncrementAmountChange(incrementAmount.current - 1)}> - </button>
             <input
               type="number"
-              onChange={(e) =>
-                (incrementAmount.current = parseInt(e.target.value))
-              }
+              ref={incrementAmountInput}
+              onChange={(e) => handleIncrementAmountChange(e.target.value)}
             />
-            <button
-              onClick={() => {
-                incrementAmount.current = parseInt(incrementAmount.current) + 1;
-              }}
-            >
-              +
-            </button>
+            <button onClick={() => handleIncrementAmountChange(incrementAmount.current + 1)}> + </button>
           </div>
         </div>
       </div>

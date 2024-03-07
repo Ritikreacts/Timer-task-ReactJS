@@ -6,6 +6,20 @@ function Step4() {
   const incrementAmount = useRef(1);
   const incrementAmountInput = useRef(null);
 
+  // (Issue to fix____-> in the auto increment amount input field is not updating)
+  // (Issue to fix____-> in the auto increment amount input field is not updating)
+  // (Issue to fix____-> in the auto increment amount input field is not updating)
+  // (Issue to fix____-> in the auto increment amount input field is not updating)
+  // (Issue to fix____-> in the auto increment amount input field is not updating)
+  // (Issue to fix____-> in the auto increment amount input field is not updating)
+  // (Issue to fix____-> in the auto increment amount input field is not updating)
+  // (Issue to fix____-> in the auto increment amount input field is not updating)
+  // (Issue to fix____-> in the auto increment amount input field is not updating)
+  // (Issue to fix____-> in the auto increment amount input field is not updating)
+  // (Issue to fix____-> in the auto increment amount input field is not updating)
+  // (Issue to fix____-> in the auto increment amount input field is not updating)
+  // (Issue to fix____-> in the auto increment amount input field is not updating)
+
   useEffect(() => {
     if (timer > 0) {
       const autoIncrement = setInterval(() => {
@@ -99,7 +113,7 @@ function Step4() {
             />
             <button
               onClick={() => {
-                incrementAmount.current = incrementAmount.current + 1;
+                incrementAmount.current = parseInt(incrementAmount.current) + 1;
               }}
             >
               +
